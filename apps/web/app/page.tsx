@@ -1,10 +1,9 @@
 import { PrismaClient } from "@repo/db/client";
+import Sample from "../pages/sample";
 export default function Page(): JSX.Element {
   return (
     <main>
-       <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <Sample/>
     </main>
   );
 }
