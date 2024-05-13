@@ -3,12 +3,15 @@ import db from "@repo/db/client";
 
 const app = express();
 
+app.use(express.json())
+
 app.post("/", async (req, res) => {
   const paymentInfo = {
     token: req.body.token,
     userId: req.body.user_identifier,
     amount: req.body.amount,
   };
+console.log(req.body);
 
   try {
     await db.$transaction([
@@ -36,6 +39,8 @@ app.post("/", async (req, res) => {
       message: "Captured",
     });
   } catch (error) {
+    console.log(error);
+    
     res.status(411).json({
       message: "Error while processing webhook",
     });
