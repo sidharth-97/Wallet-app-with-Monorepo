@@ -7,14 +7,14 @@ export const authOptions={
         CredentialsProvider({
             name:"Credentials",
             credentials:{
-                email:{label:"email",type:"text",placeholder:"sample@gmail.com"},
+                number:{label:"number",type:"text",placeholder:"9876543210"},
                 password:{label:"password",type:"password"}
             },
             async authorize(credentials:any){
                 const hashedPassword = await bcrypt.hash(credentials.password, 10);
                 const existingUser=await db.user.findFirst({
                     where:{
-                        email:credentials.email
+                        number:credentials.number
                     }
                 })
                 if(existingUser){
@@ -23,7 +23,7 @@ export const authOptions={
                         return{
                             id:existingUser.id.toString(),
                             name:existingUser.name,
-                            email:existingUser.email
+                            number:existingUser.number
                         }
                     }
                     return null
@@ -31,14 +31,14 @@ export const authOptions={
                 try {
                     const user=await db.user.create({
                         data:{
-                            email:credentials.email,
+                            number:credentials.number,
                             password:hashedPassword
                         }
                     })
                     return{
                         id:user.id.toString(),
                             name:user.name,
-                            email:user.email
+                            number:user.number
                     }
                 } catch (error) {
                     console.log(error);
