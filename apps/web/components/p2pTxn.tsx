@@ -18,7 +18,7 @@ export const P2PTransactions = ({
     }
     return <Card title="Recent Transactions">
         <div className="pt-2">
-            {transactions.map(t => <div className={`flex justify-between p-2 ${t.status==="Received"?'bg-green-300':'bg-red-400'}`}>
+            {transactions.map(t => <div className={`flex justify-between`}>
                 <div>
                     <div className="text-sm">
                         {t.status} INR
@@ -27,8 +27,8 @@ export const P2PTransactions = ({
                         {t.time.toDateString()}
                     </div>
                 </div>
-                <div className="flex flex-col justify-center">
-                    + Rs {t.amount / 100}
+                <div className={`flex flex-col justify-center ${t.status==="Received"?'text-green-300':'text-red-400'}`}>
+                    {t.status==="Received"?"+":"-"} Rs {t.amount / 100}
                 </div>
 
             </div>)}
